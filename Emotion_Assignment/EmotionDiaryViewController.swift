@@ -49,6 +49,10 @@ class EmotionDiaryViewController: UIViewController {
     @IBAction func emotionCount(_ sender: UIButton) {
         points[sender.tag] += 1
         labelList[sender.tag].text = "\(emotions[sender.tag]) \(points[sender.tag])"
+        
+        UserDefaults.standard.setValue(points[sender.tag], forKey: emotions[sender.tag])
+        let ud = UserDefaults.standard.integer(forKey: emotions[sender.tag])
+        print("\(ud) : \(emotions[sender.tag])")
     }
     
     //리셋 기능
@@ -57,6 +61,11 @@ class EmotionDiaryViewController: UIViewController {
         for i in 0...8 {
             labelList[i].text = "\(emotions[i]) \((points[0]))"
         }
+        
+        for i in 0...8 {
+            UserDefaults.standard.removeObject(forKey: emotions[i])
+        }
+        
     }
 }
 
